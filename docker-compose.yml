@@ -1,0 +1,22 @@
+version: '3.1'
+services:
+  drupal:
+    image: drupal:8-apache
+    ports:
+      - 8080:80
+    volumes:
+      - ./data/html:/var/www/html
+      - ./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini
+    restart: always
+
+  db:
+    image: mysql:5.7.27
+    ports:
+      - 3306:3306
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      - ./etc/mysql/my.ini:/etc/mysql/mysql.conf.d/my.ini
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    restart: always
